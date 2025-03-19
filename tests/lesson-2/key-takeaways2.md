@@ -24,4 +24,4 @@
 * Loops statement: for (initialization; condition; afterthought)
 ### Others: 
 * Print value: console.log () 
-* Format code: Opt + Shift + F (or just using extensions for more advance options)
+* Format code: Opt + Shift + F 
