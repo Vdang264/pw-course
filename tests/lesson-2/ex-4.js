@@ -4,7 +4,10 @@ let IdealWeight = (parseInt(Height.toString().slice(-2)) * 9 / 10);
 let MaxWeight = parseInt(Height.toString().slice(-2));
 let MinWeight = (parseInt(Height.toString().slice(-2)) * 8 / 10);
 
-console.log("Height = " + Height + 
-    ", IdealWeight = " + IdealWeight + 
-    ", MaxWeight = " + MaxWeight + 
-    ", MinWeight = " + MinWeight);
+if (Height <= 200) {
+    console.log("Height = " + Height +
+        ", IdealWeight = " + IdealWeight +
+        ", MaxWeight = " + MaxWeight +
+        ", MinWeight = " + MinWeight);
+}
+else { console.log("Cong thuc chi phu hop voi chieu cao nho hon 200") };
