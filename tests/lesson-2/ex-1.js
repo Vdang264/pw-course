@@ -8,6 +8,6 @@ if (Number % 2 == 0) {isEven = true;}
  else {isEven = false;}
 
 //print the result 
-console.log(Name + " is even number which is " + isEven);
+console.log(`${Name} is even number which is ${isEven}`);
 
  
