@@ -1,5 +1,5 @@
 //declare variables
-let Number = 12;
+const Number = 12;
 let Name = "My number";
 let isEven = false;
 
@@ -7,6 +7,6 @@ let isEven = false;
 if (Number % 2 == 0) { isEven = true; }
 else { isEven = false; }
 
-//print the result 
+//print the result using template literals
 console.log(`${Name} is even number which is ${isEven}`);
 

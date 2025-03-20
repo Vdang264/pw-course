@@ -11,8 +11,9 @@ if (Height <= 100 || Height >= 200) {
     let MaxWeight = Last2Digit;
     let MinWeight = Last2Digit * 8 / 10;
 
-    console.log(`Height = ${Height}
-        , IdealWeight = ${IdealWeight}
+    console.log(
+        `IdealWeight = ${IdealWeight}
         , MaxWeight = ${MaxWeight}
-        , MinWeight = ${MinWeight}`)
+        , MinWeight = ${MinWeight}`
+    )
 }
