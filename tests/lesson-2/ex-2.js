@@ -1,5 +1,5 @@
-//const if fixed. update the variable type to var
-var myName = "Alex";
-var myName = "Nagi";
+//const if fixed. update the variable type to let
+let myName = "Alex";
+myName = "Nagi";
 
 console.log(myName);
