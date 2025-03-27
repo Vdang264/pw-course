@@ -105,7 +105,7 @@ console.log(person["address"]["country"]); // UAE
 - Flatten and search: `.flat()`
 
 ## Function
-``` function name() { function logic} ```
+``` function functionName() { function logic} ```
 
 ### Assign to a variable 
 ```const greet = function() {console.log("Hello!"); };``` 
