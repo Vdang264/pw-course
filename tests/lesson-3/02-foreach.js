@@ -1,6 +1,7 @@
 // Print the array 
 function print(arr) {
-    arr.forEach((value, index) => console.log(arr[index]));
+    arr.forEach((value, index) => 
+        console.log(arr[index]));
 }
 
 print([9, -1, 13]);
@@ -13,11 +14,18 @@ function calculate(arr) {
 
     for (let i = 0; i < arr.length; i++) {
         sum += arr[i];
-        if (arr[i] < min) min = arr[i];
-        if (arr[i] > max) max = arr[i];
+        if (arr[i] < min) {
+            min = arr[i]
+        };
+        if (arr[i] > max) {
+            max = arr[i]
+        };
     }
 
-    console.log(`Sum: ${sum}, Min: ${min}, Max: ${max}`);
+    console.log(
+        `Sum: ${sum}, 
+        Min: ${min}, 
+        Max: ${max}`);
 }
 
 const numbers = [7, 18, 16];
@@ -33,4 +41,5 @@ function doubleArray(arr) {
 }
 
 doubleArray([8, 0]); 
+
 

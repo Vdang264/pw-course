@@ -4,13 +4,13 @@ function BMI(weight, height) {
     let result;
 
     if (bmi < 18.5) {
-        result = "Thieu can";
+        result = "Underweight";
     } else if (bmi < 25) {
-        result = "Binh thuong";
+        result = "Normal";
     } else if (bmi < 30) {
-        result = "Thua can";
+        result = "Overweight";
     } else {
-        result = "Beo phi";
+        result = "Obesity";
     }
     return result;
 }
@@ -110,7 +110,7 @@ function getMonthName(month) {
         case 10: return "October";
         case 11: return "November";
         case 12: return "December";
-        default: return "Invalid month number";
+        default: return "Invalid";
     }
 }
 

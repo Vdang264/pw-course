@@ -1,8 +1,8 @@
 const student = { 
-    name: "Alex", //property: value
+    name: "Alex", //this is property: "value"
     age: 10,
     salary: 20
- };    //property: value
+ };    
 
 // Print the properties & its value 
 for (let property in student) {
