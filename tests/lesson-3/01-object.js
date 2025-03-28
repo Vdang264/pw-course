@@ -13,12 +13,11 @@ const product = {
 };
 
 for (let property in product) {
-    console.log(` ${property} : ${product[property]}`);
-};
+    console.log(`${property} : ${product[property]}`);
+}
 
-
-const bike = [];  
-bike.push({ color: "blue" }); 
+const bike = [];
+bike.push({ color: "blue" });
 console.log(bike);
 
 const employee = {
@@ -26,10 +25,10 @@ const employee = {
     age: "23"
 };
 delete employee.age;
-console.log (employee);
+console.log(employee);
 
 const school = {
     classA: ["An", "Binh", "Chau"],
     classB: ["Dao", "Huong", "Giang"]
 };
-console.log (school);
+console.log(school);
