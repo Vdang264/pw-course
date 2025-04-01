@@ -24,10 +24,7 @@ test("Add 100 item to Todo list & remove #Odd item", async ({ page }) => {
         for (let i = 1; i <= 100; i += 2) {
             const xpathOfButton = `//button[@id="item-${i}-delete"]`;
             const button = page.locator(xpathOfButton);
-            if (await button.isVisible()) {
-                await button.click();
-                await page.waitForTimeout(100); 
-            }
+            await button.click();
         }
     });
 });
