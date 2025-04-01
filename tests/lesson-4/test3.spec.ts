@@ -23,10 +23,9 @@ test("Add 100 item to Todo list & remove #Odd item", async ({ page }) => {
     await test.step("Remove Todo items with Odd#", async () => {
         for (let i = 1; i <= 100; i += 2) {
             const xpathOfButton = `//button[@id='${i}-delete']`;
-            const buttonLocator = page.locator(xpathOfButton);
-            
-            if (await buttonLocator.isVisible()) {
-                await buttonLocator.click();
+            const button = page.locator(xpathOfButton);
+            if (await button.isVisible()) {
+                await button.click();
                 await page.waitForTimeout(100); 
             }
         }
