@@ -38,7 +38,7 @@ test("Fill register form", async ({ page }) => {
     });
 
     await test.step("Add profile picture", async() => {
-        await page.setInputFiles("//input[@id='profile']", "tests/assets/Lorem-ipsum.txt");
+        await page.setInputFiles("//input[@id='profile']", "tests/lesson-4/Lorem-ipsum.txt");
     });
 
     await test.step("Add Bio", async() => {
