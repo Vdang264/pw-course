@@ -130,7 +130,7 @@ expect(text).toBe('Welcome');
 
 ## Playwright selector 
 [Locator](https://playwright.dev/docs/locators)
-Locators are the central piece of Playwright's auto-waiting and retry-ability. In a nutshell, locators represent a way to find element(s) on the page at any moment.
+are the central piece of Playwright's auto-waiting and retry-ability. In a nutshell, locators represent a way to find element(s) on the page at any moment.
 
 - `page.getByRole()` to locate by explicit and implicit accessibility attributes.
 - `page.getByText()` to locate by text content.
