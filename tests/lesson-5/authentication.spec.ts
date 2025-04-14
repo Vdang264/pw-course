@@ -9,10 +9,8 @@ const ERROR_MESSAGE_LOCATOR = "//div[@id='login_error']";
 const H1_LOCATOR = "//h1";
 const H2_LOCATOR = "//h2";
 
-// Hardcoded credentials
 const INVALID_USERNAME = "invalidUser";
 const INVALID_PASSWORD = "invalidPass123";
-
 const VALID_USERNAME = "k11-duc";
 const VALID_PASSWORD = "I#Ddnh4SQiXIC#uF7O5UQUjW";
 
