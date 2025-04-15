@@ -15,164 +15,161 @@ const expectedCategorySlug3 = `category-van-03`;
 const categoryName4 = `category van 04`;
 const categorySlug4 = `category-van-04`;
 const expectedCategorySlug4 = `category-van-04`;
-const errorMessageNameRequired = "A name is required for this term."
-const errorMessageNameExisted = "A term with the name provided already exists in this taxonomy."
+const errorMessageNameRequired = "A name is required for this term.";
+const errorMessageNameExisted = "A term with the name provided already exists in this taxonomy.";
 const messageTagAdded = "Tag added.";
 const messageCategoryAdded = "Category added.";
 
-const USERNAME_INPUT_LOCATOR = "//input[@id='user_login']";
-const PASSWORD_INPUT_LOCATOR = "//input[@id='user_pass']";
-const LOGIN_BUTTON_LOCATOR = "//input[@id='wp-submit']";
-const POSTS_MENU_LOCATOR = "//div[contains(text(),'Posts')]";
-const TAGS_SUBMENU_LOCATOR = "//a[contains(text(),'Tags')]";
-const CATEGORIES_SUBMENU_LOCATOR = "//a[text()='Categories']";
-const PAGE_HEADER_LOCATOR = "//h1[text()='Tags']";
-const TAG_NAME_INPUT_LOCATOR = "//input[@id='tag-name']";
-const TAG_SLUG_INPUT_LOCATOR = "//input[@id='tag-slug']";
-const ADD_NEW_TAG_BUTTON_LOCATOR = "//input[@id='submit']";
-const ERROR_MESSAGE_LOCATOR = "//div[contains(@class, 'notice notice-error')]";
-const ERROR_NAME_REQUIRED_LOCATOR = `${ERROR_MESSAGE_LOCATOR}//p[text()='${errorMessageNameRequired}']`;
-const ERROR_NAME_EXISTS_LOCATOR = `${ERROR_MESSAGE_LOCATOR}//p[text()='${errorMessageNameExisted}']`;
-const SUCCESS_MESSAGE_LOCATOR = "//div[contains(@class, 'notice notice-success is-dismissible')]";
-const TAG_ADDED_LOCATOR = `${SUCCESS_MESSAGE_LOCATOR}//p[text()='${messageTagAdded}']`;
-const TAG_LINK_BY_NAME = (name: string) => `//a[text()='${name}']`;
-const TAG_SLUG_CELL_BY_SLUG = (slug: string) => `//td[text()='${slug}']`;
-const DELETE_BUTTON_BY_NAME = (name: string) => `//span[@class='delete']/a[@aria-label='Delete “${name}”']`;
-const CATEGORY_PAGE_HEADER_LOCATOR = "//h1[text()='Categories']";
-const CATEGORY_ADDED_MESSAGE_LOCATOR = `${SUCCESS_MESSAGE_LOCATOR}//p[text()='${messageCategoryAdded}']`;
-const CATEGORY_PARENT_SELECT_LOCATOR = "//select[@id='parent']";
-const SEARCH_CATEGORY_INPUT_LOCATOR = "//input[@id='tag-search-input']";
-const SEARCH_SUBMIT_LOCATOR = "//input[@id='search-submit']";
-
+const usernameInputLocator = "//input[@id='user_login']";
+const passwordInputLocator = "//input[@id='user_pass']";
+const loginButtonLocator = "//input[@id='wp-submit']";
+const postsMenuLocator = "//div[contains(text(),'Posts')]";
+const tagsSubmenuLocator = "//a[contains(text(),'Tags')]";
+const categoriesSubmenuLocator = "//a[text()='Categories']";
+const pageHeaderLocator = "//h1[text()='Tags']";
+const tagNameInputLocator = "//input[@id='tag-name']";
+const tagSlugInputLocator = "//input[@id='tag-slug']";
+const addNewTagButtonLocator = "//input[@id='submit']";
+const errorMessageLocator = "//div[contains(@class, 'notice notice-error')]";
+const errorNameRequiredLocator = `${errorMessageLocator}//p[text()='${errorMessageNameRequired}']`;
+const errorNameExistsLocator = `${errorMessageLocator}//p[text()='${errorMessageNameExisted}']`;
+const successMessageLocator = "//div[contains(@class, 'notice notice-success is-dismissible')]";
+const tagAddedLocator = `${successMessageLocator}//p[text()='${messageTagAdded}']`;
+const tagLinkByName = (name: string) => `//a[text()='${name}']`;
+const tagSlugCellBySlug = (slug: string) => `//td[text()='${slug}']`;
+const deleteButtonByName = (name: string) => `//span[@class='delete']/a[@aria-label='Delete “${name}”']`;
+const categoryPageHeaderLocator = "//h1[text()='Categories']";
+const categoryAddedMessageLocator = `${successMessageLocator}//p[text()='${messageCategoryAdded}']`;
+const categoryParentSelectLocator = "//select[@id='parent']";
+const searchCategoryInputLocator = "//input[@id='tag-search-input']";
+const searchSubmitLocator = "//input[@id='search-submit']";
 
 test.describe("POST_TAG - Post", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("https://pw-practice-dev.playwrightvn.com/wp-admin");
-    await page.locator(USERNAME_INPUT_LOCATOR).fill(usernameValid);
-    await page.locator(PASSWORD_INPUT_LOCATOR).fill(passwordValid);
-    await page.click(LOGIN_BUTTON_LOCATOR);
+    await page.locator(usernameInputLocator).fill(usernameValid);
+    await page.locator(passwordInputLocator).fill(passwordValid);
+    await page.click(loginButtonLocator);
     await expect(page).toHaveURL(/wp-admin/);
 
-    await page.hover(POSTS_MENU_LOCATOR);
-    await page.click(TAGS_SUBMENU_LOCATOR);
-    await expect(page.locator(PAGE_HEADER_LOCATOR)).toBeVisible();
+    await page.hover(postsMenuLocator);
+    await page.click(tagsSubmenuLocator);
+    await expect(page.locator(pageHeaderLocator)).toBeVisible();
   });
 
   test("POST_TAG_001: Tag - add tag failed", async ({ page }) => {
     await test.step("Click button [Add New Tag]", async () => {
-      await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-      await expect(page.locator(ERROR_NAME_REQUIRED_LOCATOR)).toBeVisible();
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(errorNameRequiredLocator)).toBeVisible();
     });
 
     await test.step("Submit the already exists name", async () => {
-      await page.locator(TAG_NAME_INPUT_LOCATOR).fill(existsName);
-      await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-      await expect(page.locator(ERROR_NAME_EXISTS_LOCATOR)).toBeVisible();
+      await page.locator(tagNameInputLocator).fill(existsName);
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(errorNameExistsLocator)).toBeVisible();
     });
   });
 
   test("POST_TAG_002: Tag - add tag success", async ({ page }) => {
     await test.step("Submit valid name", async () => {
-      await page.locator(TAG_NAME_INPUT_LOCATOR).fill(validName1);
-      await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-      await expect(page.locator(TAG_ADDED_LOCATOR)).toBeVisible();
-      await expect(page.locator(TAG_LINK_BY_NAME(validName1))).toBeVisible();
+      await page.locator(tagNameInputLocator).fill(validName1);
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(tagAddedLocator)).toBeVisible();
+      await expect(page.locator(tagLinkByName(validName1))).toBeVisible();
     });
 
     await test.step("Submit valid name & slug", async () => {
-      await page.locator(TAG_NAME_INPUT_LOCATOR).fill(validName2);
-      await page.locator(TAG_SLUG_INPUT_LOCATOR).fill(validSlug2);
-      await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-      await expect(page.locator(SUCCESS_MESSAGE_LOCATOR)).toBeVisible();
-      await expect(page.locator(TAG_LINK_BY_NAME(validName2))).toBeVisible();
-      await expect(page.locator(TAG_SLUG_CELL_BY_SLUG(validSlug2))).toBeVisible();
+      await page.locator(tagNameInputLocator).fill(validName2);
+      await page.locator(tagSlugInputLocator).fill(validSlug2);
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(successMessageLocator)).toBeVisible();
+      await expect(page.locator(tagLinkByName(validName2))).toBeVisible();
+      await expect(page.locator(tagSlugCellBySlug(validSlug2))).toBeVisible();
     });
 
     await test.step("Remove tag", async () => {
-      await page.hover(TAG_LINK_BY_NAME(validName1));
+      await page.hover(tagLinkByName(validName1));
       page.on("dialog", async dialog => dialog.accept());
-      await page.click(DELETE_BUTTON_BY_NAME(validName1));
-      await expect(page.locator(TAG_LINK_BY_NAME(validName1))).toBeHidden();
-      await page.hover(TAG_LINK_BY_NAME(validName2));
-      await page.click(DELETE_BUTTON_BY_NAME(validName2));
-      await expect(page.locator(TAG_LINK_BY_NAME(validName2))).toBeHidden();
+      await page.click(deleteButtonByName(validName1));
+      await expect(page.locator(tagLinkByName(validName1))).toBeHidden();
+      await page.hover(tagLinkByName(validName2));
+      await page.click(deleteButtonByName(validName2));
+      await expect(page.locator(tagLinkByName(validName2))).toBeHidden();
     });
   });
 
   test("POST_TAG_003: Tag - slug auto remove special character", async ({ page }) => {
     await test.step("Submit slug with special character", async () => {
-      await page.locator(TAG_NAME_INPUT_LOCATOR).fill(tagName3);
-      await page.locator(TAG_SLUG_INPUT_LOCATOR).fill(validSlug3);
-      await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
+      await page.locator(tagNameInputLocator).fill(tagName3);
+      await page.locator(tagSlugInputLocator).fill(validSlug3);
+      await page.click(addNewTagButtonLocator);
 
-      await expect(page.locator(SUCCESS_MESSAGE_LOCATOR)).toBeVisible();
-      await expect(page.locator(TAG_LINK_BY_NAME(tagName3))).toBeVisible();
-      await expect(page.locator(TAG_SLUG_CELL_BY_SLUG(expectedSlug3))).toBeVisible();
+      await expect(page.locator(successMessageLocator)).toBeVisible();
+      await expect(page.locator(tagLinkByName(tagName3))).toBeVisible();
+      await expect(page.locator(tagSlugCellBySlug(expectedSlug3))).toBeVisible();
     });
 
     await test.step("Remove tag", async () => {
-      await page.hover(TAG_LINK_BY_NAME(tagName3));
+      await page.hover(tagLinkByName(tagName3));
       page.on("dialog", async dialog => dialog.accept());
-      await page.click(DELETE_BUTTON_BY_NAME(tagName3));
-      await expect(page.locator(TAG_LINK_BY_NAME(tagName3))).toBeHidden();
+      await page.click(deleteButtonByName(tagName3));
+      await expect(page.locator(tagLinkByName(tagName3))).toBeHidden();
     });
   });
-
 });
 
 test.describe("POST_CATEGORY - Category", () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto("https://pw-practice-dev.playwrightvn.com/wp-admin");
-      await page.locator(USERNAME_INPUT_LOCATOR).fill(usernameValid);
-      await page.locator(PASSWORD_INPUT_LOCATOR).fill(passwordValid);
-      await page.click(LOGIN_BUTTON_LOCATOR);
-      await expect(page).toHaveURL(/wp-admin/);
-  
-      await page.hover(POSTS_MENU_LOCATOR);
-      await page.click(TAGS_SUBMENU_LOCATOR);
-      await expect(page.locator(PAGE_HEADER_LOCATOR)).toBeVisible();
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://pw-practice-dev.playwrightvn.com/wp-admin");
+    await page.locator(usernameInputLocator).fill(usernameValid);
+    await page.locator(passwordInputLocator).fill(passwordValid);
+    await page.click(loginButtonLocator);
+    await expect(page).toHaveURL(/wp-admin/);
+
+    await page.hover(postsMenuLocator);
+    await page.click(tagsSubmenuLocator);
+    await expect(page.locator(pageHeaderLocator)).toBeVisible();
+  });
+
+  test("POST_CATEGORY_001: Category - create category success", async ({ page }) => {
+    await test.step("Navigate to Categories", async () => {
+      await page.click(categoriesSubmenuLocator);
+      await expect(page.locator(categoryPageHeaderLocator)).toBeVisible();
     });
-  
-    test("POST_CATEGORY_001: Category - create category success", async ({ page }) => {
-        await test.step("Navigate to Categories", async () => {
-          await page.click(CATEGORIES_SUBMENU_LOCATOR);
-          await expect(page.locator(CATEGORY_PAGE_HEADER_LOCATOR)).toBeVisible();
-        });
-      
-        await test.step("Submit valid category with slug", async () => {
-          await page.locator(TAG_NAME_INPUT_LOCATOR).fill(categoryName3);
-          await page.locator(TAG_SLUG_INPUT_LOCATOR).fill(categorySlug3);
-          await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-          await expect(page.locator(CATEGORY_ADDED_MESSAGE_LOCATOR)).toBeVisible();
-          await expect(page.locator(TAG_SLUG_CELL_BY_SLUG(expectedCategorySlug3))).toBeVisible();
-        });
-        
-        await test.step("Remove categories", async () => {
-            await page.click(CATEGORIES_SUBMENU_LOCATOR);
-            await page.hover(TAG_LINK_BY_NAME(categoryName3));
-            page.on("dialog", async dialog => dialog.accept());
-            await page.click(DELETE_BUTTON_BY_NAME(categoryName3));
-            await expect(page.locator(TAG_LINK_BY_NAME(categoryName3))).toBeHidden();
-          });
-      
-        await test.step("Submit valid category with parent", async () => {
-          await page.locator(TAG_NAME_INPUT_LOCATOR).fill(categoryName4);
-          await expect(page.locator(CATEGORY_PARENT_SELECT_LOCATOR)).toBeVisible();
-          await page.locator(CATEGORY_PARENT_SELECT_LOCATOR).selectOption({ label: "k11 class" });
-          await page.locator(TAG_SLUG_INPUT_LOCATOR).fill(categorySlug4);
-          await page.click(ADD_NEW_TAG_BUTTON_LOCATOR);
-          await expect(page.locator(CATEGORY_ADDED_MESSAGE_LOCATOR)).toBeVisible();
-          await expect(page.locator(TAG_SLUG_CELL_BY_SLUG(expectedCategorySlug4))).toBeVisible();
-        });
-      
-        await test.step("Remove categories", async () => {
-          await page.click(CATEGORIES_SUBMENU_LOCATOR);
-          await page.locator(SEARCH_CATEGORY_INPUT_LOCATOR).fill(categoryName4);
-          await page.click(SEARCH_SUBMIT_LOCATOR);
-          await page.hover(TAG_LINK_BY_NAME(categoryName4));
-          await page.click(DELETE_BUTTON_BY_NAME(categoryName4));
-          await expect(page.locator(TAG_LINK_BY_NAME(categoryName4))).toBeHidden();
-        });
-      });
-         
+
+    await test.step("Submit valid category with slug", async () => {
+      await page.locator(tagNameInputLocator).fill(categoryName3);
+      await page.locator(tagSlugInputLocator).fill(categorySlug3);
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(categoryAddedMessageLocator)).toBeVisible();
+      await expect(page.locator(tagSlugCellBySlug(expectedCategorySlug3))).toBeVisible();
+    });
+
+    await test.step("Remove categories", async () => {
+      await page.click(categoriesSubmenuLocator);
+      await page.hover(tagLinkByName(categoryName3));
+      page.on("dialog", async dialog => dialog.accept());
+      await page.click(deleteButtonByName(categoryName3));
+      await expect(page.locator(tagLinkByName(categoryName3))).toBeHidden();
+    });
+
+    await test.step("Submit valid category with parent", async () => {
+      await page.locator(tagNameInputLocator).fill(categoryName4);
+      await expect(page.locator(categoryParentSelectLocator)).toBeVisible();
+      await page.locator(categoryParentSelectLocator).selectOption({ label: "k11 class" });
+      await page.locator(tagSlugInputLocator).fill(categorySlug4);
+      await page.click(addNewTagButtonLocator);
+      await expect(page.locator(categoryAddedMessageLocator)).toBeVisible();
+      await expect(page.locator(tagSlugCellBySlug(expectedCategorySlug4))).toBeVisible();
+    });
+
+    await test.step("Remove categories", async () => {
+      await page.click(categoriesSubmenuLocator);
+      await page.locator(searchCategoryInputLocator).fill(categoryName4);
+      await page.click(searchSubmitLocator);
+      await page.hover(tagLinkByName(categoryName4));
+      await page.click(deleteButtonByName(categoryName4));
+      await expect(page.locator(tagLinkByName(categoryName4))).toBeHidden();
+    });
+  });
 });
